@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="union_max_parity_default">2</integer>
+    <integer name="union_max_continuity_default">2</integer>
+    <bool name="union_compare_blue_default">true</bool>
+</resources>
