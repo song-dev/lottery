@@ -9,17 +9,15 @@ import kotlin.random.nextInt
 object UnionLottoCrater {
 
     fun generate(context: Context): Array<String> {
-        var count = 0
         val list = mutableListOf<IntArray>()
-        while (count < 1000) {
+        repeat(1000) {
             val union = generateUnion(context)
             list.add(union)
-            count++
         }
         val result = mutableListOf<String>()
-        result.add(list[Random.nextInt(IntRange(0, list.size))].contentToString())
-        result.add(list[Random.nextInt(IntRange(0, list.size))].contentToString())
-        result.add(list[Random.nextInt(IntRange(0, list.size))].contentToString())
+        repeat(3) {
+            result.add(list[Random.nextInt(IntRange(0, list.size))].contentToString())
+        }
         return result.toTypedArray()
     }
 
@@ -39,17 +37,18 @@ object UnionLottoCrater {
         }
     }
 
-    private fun randomUnion(): IntArray {
-        val union = mutableListOf<Int>()
-        while (union.size < 6) {
-            val value = Random.nextInt(IntRange(1, 33))
-            if (value !in union) {
-                union.add(value)
+    private fun randomUnion(): IntArray =
+        mutableListOf<Int>()
+            .run {
+                while (this.size < 6) {
+                    val value = Random.nextInt(IntRange(1, 33))
+                    if (value !in this) {
+                        this.add(value)
+                    }
+                }
+                this.sort()
+                this.add(Random.nextInt(IntRange(1, 16)))
+                return this.toIntArray()
             }
-        }
-        union.sort()
-        union.add(Random.nextInt(IntRange(1, 16)))
-        return union.toIntArray()
-    }
 
 }

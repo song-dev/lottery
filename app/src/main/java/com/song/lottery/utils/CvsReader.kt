@@ -8,10 +8,14 @@ import java.io.*
 object CvsReader {
 
     fun readByCVSReader(context: Context) {
-        copy(context.assets.open("union_lotto.csv"), File(context.filesDir, "union_lotto.csv"))
-        val csvReader = CSVReaderBuilder(FileReader(File(context.filesDir, "union_lotto.csv")))
-            .withCSVParser(CSVParserBuilder().withSeparator(',').build())
-            .build()
+        copy(
+            context.assets.open(Constants.UNION_LOTTO_FILE),
+            File(context.filesDir, Constants.UNION_LOTTO_FILE)
+        )
+        val csvReader =
+            CSVReaderBuilder(FileReader(File(context.filesDir, Constants.UNION_LOTTO_FILE)))
+                .withCSVParser(CSVParserBuilder().withSeparator(',').build())
+                .build()
         val header = csvReader.readNext()
         var line: Array<String>? = csvReader.readNext()
         while (line != null) {
@@ -24,7 +28,7 @@ object CvsReader {
         val outputStream = FileOutputStream(dest)
         val bufferedInputStream = BufferedInputStream(src)
         val bufferedOutputStream = BufferedOutputStream(outputStream)
-        val buf = ByteArray(4096)
+        val buf = ByteArray(Constants.BUF_4096)
         var len = bufferedInputStream.read(buf)
         while (len != -1) {
             bufferedOutputStream.write(buf, 0, len)
@@ -39,8 +43,12 @@ object CvsReader {
 
     fun readCvs(context: Context): Array<String> {
         if (list.isEmpty()) {
-            val bufferedReader =
-                BufferedReader(InputStreamReader(context.assets.open("union_lotto.csv"), "utf-8"))
+            val bufferedReader = BufferedReader(
+                InputStreamReader(
+                    context.assets.open(Constants.UNION_LOTTO_FILE),
+                    "utf-8"
+                )
+            )
             var line: String? = bufferedReader.readLine()
             while (line != null) {
                 val split = line.split(",")
