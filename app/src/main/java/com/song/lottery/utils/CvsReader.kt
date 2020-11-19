@@ -43,19 +43,15 @@ object CvsReader {
 
     fun readCvs(context: Context): Array<String> {
         if (list.isEmpty()) {
-            val bufferedReader = BufferedReader(
-                InputStreamReader(
-                    context.assets.open(Constants.UNION_LOTTO_FILE),
-                    "utf-8"
-                )
-            )
-            var line: String? = bufferedReader.readLine()
-            while (line != null) {
-                val split = line.split(",")
-                if (split.isNotEmpty()) {
-                    list.add(split.subList(2, 9).joinToString(separator = ""))
+            context.assets.open(Constants.UNION_LOTTO_FILE).bufferedReader().use {
+                var line: String? = it.readLine()
+                while (line != null) {
+                    val split = line.split(",")
+                    if (split.isNotEmpty()) {
+                        list.add(split.subList(2, 9).joinToString(separator = ""))
+                    }
+                    line = it.readLine()
                 }
-                line = bufferedReader.readLine()
             }
             if (list.isNotEmpty()) {
                 list.removeFirst()

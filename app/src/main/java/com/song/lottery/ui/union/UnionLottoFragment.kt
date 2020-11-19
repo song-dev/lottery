@@ -15,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.song.lottery.R
+import com.song.lottery.base.GenerateUnionModel
 import com.song.lottery.base.MultiTypeAdapter
 import com.song.lottery.base.Normal
 import com.song.lottery.base.Visitable
@@ -47,7 +48,7 @@ class UnionLottoFragment : Fragment() {
         val adapter = MultiTypeAdapter(list)
         recyclerView = root.findViewById(R.id.recycler_view)
         swipeRefreshLayout = root.findViewById(R.id.swipe_refresh_layout)
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         recyclerView.adapter = adapter
         unionLottoViewModel.list.observe(viewLifecycleOwner, Observer {
             swipeRefreshLayout.isRefreshing = false
@@ -79,7 +80,7 @@ class UnionLottoFragment : Fragment() {
         // 获取数据
         val list = CvsReader.readCvs(requireContext()).sliceArray(IntRange(0, 4))
             .joinToString(separator = "\n")
-        UnionLottoCrater.generate(requireContext()).joinToString("\n")
-        unionLottoViewModel.setValue(listOf<Visitable>(Normal(list)))
+        val union = UnionLottoCrater.generate(requireContext()).joinToString("\n")
+        unionLottoViewModel.setValue(listOf<Visitable>(Normal(list),GenerateUnionModel(union)))
     }
 }

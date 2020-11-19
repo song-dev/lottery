@@ -32,16 +32,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        init(applicationContext)
     }
 
-    private fun init(context: Context) {
-        thread {
-            kotlin.run {
-                val currentThreadTimeMillis = SystemClock.currentThreadTimeMillis()
-                CvsReader.initCvs(context)
-                println("Cvs load time: ${SystemClock.currentThreadTimeMillis() - currentThreadTimeMillis}")
-            }
-        }
-    }
 }
