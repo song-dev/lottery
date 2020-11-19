@@ -1,28 +1,26 @@
 package com.song.lottery.utils
 
 import android.content.Context
-import com.opencsv.CSVParserBuilder
-import com.opencsv.CSVReaderBuilder
 import java.io.*
 
 object CvsReader {
 
-    fun readByCVSReader(context: Context) {
-        copy(
-            context.assets.open(Constants.UNION_LOTTO_FILE),
-            File(context.filesDir, Constants.UNION_LOTTO_FILE)
-        )
-        val csvReader =
-            CSVReaderBuilder(FileReader(File(context.filesDir, Constants.UNION_LOTTO_FILE)))
-                .withCSVParser(CSVParserBuilder().withSeparator(',').build())
-                .build()
-        val header = csvReader.readNext()
-        var line: Array<String>? = csvReader.readNext()
-        while (line != null) {
-            println(line[0])
-            line = csvReader.readNext()
-        }
-    }
+//    fun readByCVSReader(context: Context) {
+//        copy(
+//            context.assets.open(Constants.UNION_LOTTO_FILE),
+//            File(context.filesDir, Constants.UNION_LOTTO_FILE)
+//        )
+//        val csvReader =
+//            CSVReaderBuilder(FileReader(File(context.filesDir, Constants.UNION_LOTTO_FILE)))
+//                .withCSVParser(CSVParserBuilder().withSeparator(',').build())
+//                .build()
+//        val header = csvReader.readNext()
+//        var line: Array<String>? = csvReader.readNext()
+//        while (line != null) {
+//            println(line[0])
+//            line = csvReader.readNext()
+//        }
+//    }
 
     private fun copy(src: InputStream, dest: File) {
         val outputStream = FileOutputStream(dest)
