@@ -1,40 +1,55 @@
 package com.song.lottery.utils
 
 import android.content.Context
+import com.opencsv.CSVParserBuilder
+import com.opencsv.CSVReaderBuilder
 import java.io.*
 
 object CvsReader {
 
-//    fun readByCVSReader(context: Context) {
-//        copy(
-//            context.assets.open(Constants.UNION_LOTTO_FILE),
-//            File(context.filesDir, Constants.UNION_LOTTO_FILE)
-//        )
-//        val csvReader =
-//            CSVReaderBuilder(FileReader(File(context.filesDir, Constants.UNION_LOTTO_FILE)))
-//                .withCSVParser(CSVParserBuilder().withSeparator(',').build())
-//                .build()
-//        val header = csvReader.readNext()
-//        var line: Array<String>? = csvReader.readNext()
-//        while (line != null) {
-//            println(line[0])
-//            line = csvReader.readNext()
-//        }
-//    }
+    private val origin: MutableList<List<String>> = mutableListOf()
 
-    private fun copy(src: InputStream, dest: File) {
-        val outputStream = FileOutputStream(dest)
-        val bufferedInputStream = BufferedInputStream(src)
-        val bufferedOutputStream = BufferedOutputStream(outputStream)
-        val buf = ByteArray(Constants.BUF_4096)
-        var len = bufferedInputStream.read(buf)
-        while (len != -1) {
-            bufferedOutputStream.write(buf, 0, len)
-            bufferedOutputStream.flush()
-            len = bufferedInputStream.read(buf)
+    private fun read(context: Context): MutableList<List<String>> {
+        if (origin.isEmpty()) {
+            context.assets.open(Constants.UNION_LOTTO_FILE).bufferedReader().useLines {
+                it.forEach { line ->
+                    if (line.isNotBlank()) {
+                        val split = line.split(",")
+                        if (split.isNotEmpty()) {
+                            val item = mutableListOf<String>()
+                            item.addAll(split.subList(1, 9))
+                            item.add(split[10])
+                            item.add(split[16])
+                            origin.add(item)
+                        }
+                    }
+                }
+            }
+            if (origin.isNotEmpty()) {
+                origin.removeFirst()
+            }
         }
-        bufferedInputStream.close()
-        bufferedOutputStream.close()
+        return origin
+    }
+
+    fun readByCVSReader(context: Context): MutableList<List<String>> {
+        if (origin.isEmpty()) {
+            val csvReader =
+                CSVReaderBuilder(context.assets.open(Constants.UNION_LOTTO_FILE).bufferedReader())
+                    .withCSVParser(CSVParserBuilder().withSeparator(',').build())
+                    .build()
+            val header = csvReader.readNext()
+            var line: Array<String>? = csvReader.readNext()
+            while (line != null) {
+                val item = mutableListOf<String>()
+                item.addAll(line.sliceArray(IntRange(1, 8)))
+                item.add(line[10])
+                item.add(line[16])
+                origin.add(item)
+                line = csvReader.readNext()
+            }
+        }
+        return origin
     }
 
     private val list: MutableList<String> = mutableListOf()
@@ -59,7 +74,7 @@ object CvsReader {
     }
 
     fun initCvs(context: Context) {
-        readCvs(context)
+        readByCVSReader(context)
     }
 
 }

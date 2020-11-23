@@ -4,19 +4,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class MultiTypeAdapter(private var models: List<Visitable>) :
+class LotteryAdapter(private var models: List<Model>) :
     RecyclerView.Adapter<BaseViewHolder>() {
 
     private val typeFactory: TypeFactory = TypeFactory()
 
-    fun updateData(list: List<Visitable>) {
+    fun updateData(list: List<Model>) {
         models = list
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        val context = parent.context
-        val itemView = View.inflate(context, viewType, null)
+        val itemView = View.inflate(parent.context, viewType, null)
         return typeFactory.createViewHolder(viewType, itemView)
     }
 
@@ -29,7 +28,7 @@ class MultiTypeAdapter(private var models: List<Visitable>) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return models[position].type(typeFactory)
+        return models[position].type()
     }
 
 }

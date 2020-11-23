@@ -17,4 +17,11 @@ class ExampleUnitTest {
         println(intArrayOf(0, 2, 3, 4, 6, 7).joinToString(separator = "") { "%02d".format(it) })
         assertEquals(4, 2 + 2)
     }
+
+    @Test
+    fun test_regex(){
+        val s = "837,138,9 s8 8"
+        println(s.replace(Regex("\\D"),""))
+
+    }
 }

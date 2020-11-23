@@ -6,21 +6,14 @@ import com.song.lottery.R
 class TypeFactory {
 
     companion object {
-        const val TYPE_NORMAL = R.layout.item_union_history_title
-        const val TYPE_CONTENT = R.layout.item_union_history_content
-    }
-
-    fun type(normal: Normal): Int {
-        return TYPE_NORMAL
-    }
-
-    fun type(normal: GenerateUnionModel): Int {
-        return TYPE_CONTENT
+        const val TYPE_HISTORY_TITLE = R.layout.item_union_history_title
+        const val TYPE_HISTORY_CONTENT = R.layout.item_union_history_content
     }
 
     fun createViewHolder(type: Int, itemView: View): BaseViewHolder {
         return when (type) {
-            TYPE_NORMAL -> NormalViewHolder(itemView)
+            TYPE_HISTORY_TITLE -> HistoryTitleViewHolder(itemView)
+            TYPE_HISTORY_CONTENT -> HistoryContentViewHolder(itemView)
             else -> GenerateUnionViewHolder(itemView)
         }
     }
