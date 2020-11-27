@@ -14,8 +14,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.song.lottery.R
-import com.song.lottery.base.*
+import com.song.lottery.adapter.*
 import com.song.lottery.creater.UnionLottoCrater
+import com.song.lottery.ui.union.model.GenerateUnionModel
+import com.song.lottery.ui.union.model.HistoryContentModel
+import com.song.lottery.ui.union.model.HistoryTitleModel
 import com.song.lottery.utils.CvsReader
 import kotlin.concurrent.thread
 
@@ -86,6 +89,7 @@ class UnionLottoFragment : Fragment() {
                             list.slice(IntRange(0, 4)).forEach { content ->
                                 data.add(HistoryContentModel(content))
                             }
+                            data.add(GenerateUnionModel(union))
                             unionLottoViewModel.setValue(data)
                         }
                     }

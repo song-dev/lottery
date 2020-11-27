@@ -3,7 +3,7 @@ package com.song.lottery.ui.union
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.song.lottery.base.Model
+import com.song.lottery.adapter.Model
 
 class UnionLottoViewModel : ViewModel() {
 

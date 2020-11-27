@@ -1,8 +1,10 @@
-package com.song.lottery.base
+package com.song.lottery.ui.union.model
 
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.song.lottery.R
+import com.song.lottery.adapter.BaseViewHolder
+import com.song.lottery.adapter.LotteryAdapter
 
 class HistoryContentViewHolder(itemView: View) : BaseViewHolder(itemView) {
     override fun <T> setUpView(model: T, position: Int, adapter: LotteryAdapter) {

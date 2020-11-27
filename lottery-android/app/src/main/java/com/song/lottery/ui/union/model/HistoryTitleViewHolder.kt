@@ -1,10 +1,12 @@
-package com.song.lottery.base
+package com.song.lottery.ui.union.model
 
 import android.text.Html
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.imageview.ShapeableImageView
 import com.song.lottery.R
+import com.song.lottery.adapter.BaseViewHolder
+import com.song.lottery.adapter.LotteryAdapter
 import java.math.BigDecimal
 import java.math.RoundingMode
 

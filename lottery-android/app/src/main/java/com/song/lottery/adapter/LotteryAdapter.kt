@@ -1,4 +1,4 @@
-package com.song.lottery.base
+package com.song.lottery.adapter
 
 import android.view.View
 import android.view.ViewGroup

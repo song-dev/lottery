@@ -24,7 +24,7 @@ object UnionLottoTactics {
         val union = item.joinToString(separator = "") { "%02d".format(it) }
         return if (union in history) false.also {
             println("=======================history number=============================")
-            Toast.makeText(context, "history number", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "history number", Toast.LENGTH_SHORT).show()
         } else true
     }
 

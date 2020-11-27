@@ -10,34 +10,67 @@
             android:key="union_max_parity"
             android:max="6"
             android:title="最少奇/偶数"
-            app:iconSpaceReserved="false" />
+            app:iconSpaceReserved="false"
+            app:showSeekBarValue="true" />
 
         <SeekBarPreference
             android:defaultValue="2"
             android:key="union_max_continuity"
             android:max="6"
             android:title="最大连续"
+            app:iconSpaceReserved="false"
+            app:showSeekBarValue="true" />
+
+        <SeekBarPreference
+            android:defaultValue="1"
+            android:key="union_generate_count"
+            android:max="10"
+            android:title="单次生成注数"
+            app:iconSpaceReserved="false"
+            app:showSeekBarValue="true" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="union_compare_blue"
+            android:title="连续两期蓝球不相同"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="union_compare_blue"
+            android:title="不和往期不重复"
             app:iconSpaceReserved="false" />
 
         <SwitchPreference
             android:defaultValue="false"
             android:key="union_compare_blue"
-            android:title="连续两期蓝球不相同" />
+            android:title="篮球和红球不相同"
+            app:iconSpaceReserved="false" />
+
+        <MultiSelectListPreference
+            android:entries="@array/red_ball_kill_number_entries"
+            android:entryValues="@array/red_ball_kill_number__values"
+            android:key="red_ball_kill_number"
+            android:title="红球杀号"
+            app:iconSpaceReserved="false" />
+
+        <MultiSelectListPreference
+            android:entries="@array/blue_ball_kill_number_entries"
+            android:entryValues="@array/blue_ball_kill_number__values"
+            android:key="blue_ball_kill_number"
+            android:title="蓝球杀号"
+            app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="大乐透策略">
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="大乐透策略">
 
         <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
             app:key="sync"
             app:title="@string/sync_title" />
-
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
 
     </PreferenceCategory>
 
